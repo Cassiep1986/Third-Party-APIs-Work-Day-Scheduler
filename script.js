@@ -8,7 +8,7 @@ $("#currentDay").text(today.format("dddd, MMMM, Do, YYYY"));
 $(".container").each(function () { 
     const time = $(this).attr("id").split("-").pop();
  
-    if (currenttime === time) {
+    if (currenttime == time) {
         $(this).addClass("present");
     } else if (currenttime < time) {
         $(this).addClass("future");
@@ -17,19 +17,31 @@ $(".container").each(function () {
     };
 
 });
-window.onbeforeunload = function() {
-    localStorage.setItem(keep, $('.description').val());
-};
+
+
+$(".saveBtn").click (function () {
+
+    // var that holds a unique key for each btn
+    const key = $(this).parent().parent().attr("id");
+    
+    // var that holds the value for the btn clicked
+    const value = $(this).parent().find("textarea").val();
+    
+    localStorage.setItem(key,value);
+
+    
+});
 
 window.onload = function() {
 
-    localStorage.getItem(".description").val;
+    const timeblock = $(".container")
+  for (let i = 0; i < timeblock.length; i++) {
+      const element = timeblock[i].getAttribute("id");
+      const localValue = localStorage.getItem(element);
+    const textArea = timeblock[i].children[0].children[1];
+    textArea.value = localValue
+      
+  }
  
 };
-
-$(".saveBtn").click (function () {
-    localStorage.keep = $('.description').val();
-
-});
-
 
